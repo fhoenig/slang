@@ -86,6 +86,11 @@ struct CLikeSourceEmitter::ComputeEmitActionsContext
         {
             return SourceLanguage::CUDA;
         }
+        case CodeGenTarget::MetalSource:
+        {
+            return SourceLanguage::METAL;
+        }
+
     }
 }
 
@@ -1351,6 +1356,7 @@ void CLikeSourceEmitter::emitInstResultDecl(IRInst* inst)
         switch (getSourceLanguage())
         {
         case SourceLanguage::CUDA:
+        case SourceLanguage::METAL:
         case SourceLanguage::HLSL:
         case SourceLanguage::C:
         case SourceLanguage::CPP:

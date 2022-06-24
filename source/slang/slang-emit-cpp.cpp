@@ -186,6 +186,7 @@ static bool _isCppOrCudaTarget(CodeGenTarget target)
     case CodeGenTarget::CPPSource:
     case CodeGenTarget::HostCPPSource:
     case CodeGenTarget::CUDASource:
+    case CodeGenTarget::MetalSource:
         return true;
     default:
         return false;

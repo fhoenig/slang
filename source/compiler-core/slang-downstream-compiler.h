@@ -188,6 +188,7 @@ public:
             C       = SourceLanguageFlags(1) << SLANG_SOURCE_LANGUAGE_C,
             CPP     = SourceLanguageFlags(1) << SLANG_SOURCE_LANGUAGE_CPP,
             CUDA    = SourceLanguageFlags(1) << SLANG_SOURCE_LANGUAGE_CUDA,
+            Metal   = SourceLanguageFlags(1) << SLANG_SOURCE_LANGUAGE_METAL,
         };
     };
 

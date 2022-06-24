@@ -1425,6 +1425,7 @@ LayoutRulesFamilyImpl* getDefaultLayoutRulesFamilyForTarget(TargetRequest* targe
 
     case CodeGenTarget::PTX:
     case CodeGenTarget::CUDASource:
+    case CodeGenTarget::MetalSource:
     {
         return &kCUDALayoutRulesFamilyImpl;
     }
@@ -1616,15 +1617,28 @@ bool isCUDATarget(TargetRequest* targetReq)
     default:
         return false;
 
+    case CodeGenTarget::MetalSource:
     case CodeGenTarget::CUDASource:
     case CodeGenTarget::PTX:
         return true;
     }
 }
 
+bool isMetalTarget(TargetRequest* targetReq)
+{
+    switch( targetReq->getTarget() )
+    {
+    default:
+        return false;
+
+    case CodeGenTarget::MetalSource:
+        return true;
+    }
+}
+
 bool areResourceTypesBindlessOnTarget(TargetRequest* targetReq)
 {
-    return isCPUTarget(targetReq) || isCUDATarget(targetReq);
+    return isCPUTarget(targetReq) || isCUDATarget(targetReq) || isMetalTarget(targetReq);
 }
 
 static bool isD3D11Target(TargetRequest*)
@@ -2140,6 +2154,7 @@ static RefPtr<TypeLayout> _createParameterGroupTypeLayout(
     bool wantConstantBuffer = _usesOrdinaryData(rawElementTypeLayout)
         || _usesExistentialData(rawElementTypeLayout)
         || isCUDATarget(context.targetReq)
+        || isMetalTarget(context.targetReq)
         || isCPUTarget(context.targetReq);
     if( wantConstantBuffer )
     {
@@ -2494,7 +2509,7 @@ static bool needsConstantBuffer(
     // data whatsoever.
     //
     auto targetReq = context.targetReq;
-    if( isCPUTarget(targetReq) || isCUDATarget(targetReq) )
+    if( isCPUTarget(targetReq) || isCUDATarget(targetReq) || isMetalTarget(targetReq))
         return true;
 
     return false;
@@ -3885,7 +3900,9 @@ static TypeLayoutResult _createTypeLayout(
             // type argument that the parameter will be specialized to.
             //
             bool targetSupportsPointer =
-                isCPUTarget(context.targetReq) || isCUDATarget(context.targetReq);
+                isCPUTarget(context.targetReq) ||
+                isCUDATarget(context.targetReq) ||
+                isMetalTarget(context.targetReq);
             bool hasConcreteSpecializationArg = context.specializationArgCount != 0;
             if (!targetSupportsPointer && hasConcreteSpecializationArg)
             {

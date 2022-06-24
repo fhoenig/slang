@@ -121,7 +121,7 @@ namespace Slang
 
     void IRUse::debugValidate()
     {
-#ifdef _DEBUG
+#ifdef _DEBUG__
         auto uv = this->usedValue;
         if(!uv)
         {

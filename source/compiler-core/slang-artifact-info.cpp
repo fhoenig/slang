@@ -62,6 +62,7 @@ static ArtifactPayloadInfo::Lookup _makePayloadInfoLookup()
         {Payload::CPP,              Flavor::Source,       0},
         {Payload::C,                Flavor::Source,       0},
         {Payload::CUDA,             Flavor::Source,       0},
+        {Payload::Metal,            Flavor::Source,       0},
         {Payload::Slang,            Flavor::Source,       0},
 
         {Payload::DebugInfo,        Flavor::Unknown,      0},
@@ -190,7 +191,7 @@ static const KindExtension g_cpuKindExts[] =
     case Payload::C:            return UnownedStringSlice::fromLiteral("c");
 
     case Payload::CUDA:         return UnownedStringSlice::fromLiteral("cu");
-
+    case Payload::Metal:        return UnownedStringSlice::fromLiteral("metal");
     case Payload::Slang:        return UnownedStringSlice::fromLiteral("slang");
 
     case Payload::Zip:          return UnownedStringSlice::fromLiteral("zip");

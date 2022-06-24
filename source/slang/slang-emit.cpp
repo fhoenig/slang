@@ -63,7 +63,7 @@
 #include "slang-emit-hlsl.h"
 #include "slang-emit-cpp.h"
 #include "slang-emit-cuda.h"
-
+#include "slang-emit-metal.h"
 #include <assert.h>
 
 Slang::String get_slang_cpp_host_prelude();
@@ -291,7 +291,10 @@ Result linkAndOptimizeIR(
             #endif
             validateIRModuleIfEnabled(codeGenContext, irModule);
             break;
-
+        case CodeGenTarget::MetalSource:
+            collectOptiXEntryPointUniformParams(irModule);
+            validateIRModuleIfEnabled(codeGenContext, irModule);
+            break;
         case CodeGenTarget::CPPSource:
             passOptions.alwaysCreateCollectedParam = true;
         default:
@@ -316,6 +319,7 @@ Result linkAndOptimizeIR(
     case CodeGenTarget::HostCPPSource:
     case CodeGenTarget::CPPSource:
     case CodeGenTarget::CUDASource:
+    case CodeGenTarget::MetalSource:
         break;
     }
 
@@ -618,6 +622,7 @@ Result linkAndOptimizeIR(
     //
     switch(target)
     {
+    case CodeGenTarget::MetalSource:
     case CodeGenTarget::CUDASource:
     case CodeGenTarget::PTX:
         {
@@ -676,6 +681,12 @@ Result linkAndOptimizeIR(
             legalizeEntryPointVaryingParamsForCUDA(irModule, codeGenContext->getSink());
         }
         break;
+    case CodeGenTarget::MetalSource:
+        {
+            legalizeEntryPointVaryingParamsForCUDA(irModule, codeGenContext->getSink());
+            // TODO !!
+        }
+        break;
 
     default:
         break;
@@ -700,6 +711,7 @@ Result linkAndOptimizeIR(
 
     case CodeGenTarget::CPPSource:
     case CodeGenTarget::CUDASource:
+    case CodeGenTarget::MetalSource:
         moveGlobalVarInitializationToEntryPoints(irModule);
         introduceExplicitGlobalContext(irModule, target);
         if(target == CodeGenTarget::CPPSource)
@@ -908,6 +920,11 @@ SlangResult CodeGenContext::emitEntryPointsSourceFromIR(
             sourceEmitter = new CUDASourceEmitter(desc);
             break;
         }
+        case SourceLanguage::METAL:
+        {
+            sourceEmitter = new MetalSourceEmitter(desc);
+            break;
+        }
         default: break;
     }
 
@@ -932,6 +949,7 @@ SlangResult CodeGenContext::emitEntryPointsSourceFromIR(
         case SourceLanguage::CPP:
         case SourceLanguage::C:
         case SourceLanguage::CUDA:
+        case SourceLanguage::METAL:
             linkingAndOptimizationOptions.shouldLegalizeExistentialAndResourceTypes = false;
             break;
         }

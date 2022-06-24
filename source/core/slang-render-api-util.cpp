@@ -19,6 +19,7 @@ namespace Slang {
     { RenderApiType::D3D11,  "dx11,d3d11",      "hlsl,hlsl-rewrite,slang"},
     { RenderApiType::CPU,    "cpu",             ""},
     { RenderApiType::CUDA,   "cuda",            "cuda,ptx"},
+    { RenderApiType::Metal,  "metal",           "metal"},
 };
 
 static int _calcAvailableApis()
@@ -282,6 +283,7 @@ static bool _canLoadSharedLibrary(const char* libName)
     {
         case RenderApiType::OpenGl:
         case RenderApiType::Vulkan:
+        case RenderApiType::Metal:
         {
             return true;
         }

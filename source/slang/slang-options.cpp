@@ -245,22 +245,23 @@ struct OptionsParser
 
         static const Entry entries[] = 
         {
-            { ".slang", SLANG_SOURCE_LANGUAGE_SLANG, SLANG_STAGE_NONE },
+            { ".slang", SLANG_SOURCE_LANGUAGE_SLANG,  SLANG_STAGE_NONE },
 
-            { ".hlsl",  SLANG_SOURCE_LANGUAGE_HLSL, SLANG_STAGE_NONE },
-            { ".fx",    SLANG_SOURCE_LANGUAGE_HLSL, SLANG_STAGE_NONE },
+            { ".hlsl",  SLANG_SOURCE_LANGUAGE_HLSL,   SLANG_STAGE_NONE },
+            { ".fx",    SLANG_SOURCE_LANGUAGE_HLSL,   SLANG_STAGE_NONE },
 
-            { ".glsl", SLANG_SOURCE_LANGUAGE_GLSL,  SLANG_STAGE_NONE },
-            { ".vert", SLANG_SOURCE_LANGUAGE_GLSL,  SLANG_STAGE_VERTEX },
-            { ".frag", SLANG_SOURCE_LANGUAGE_GLSL,  SLANG_STAGE_FRAGMENT },
-            { ".geom", SLANG_SOURCE_LANGUAGE_GLSL,  SLANG_STAGE_GEOMETRY },
-            { ".tesc", SLANG_SOURCE_LANGUAGE_GLSL,  SLANG_STAGE_HULL },
-            { ".tese", SLANG_SOURCE_LANGUAGE_GLSL,  SLANG_STAGE_DOMAIN },
-            { ".comp", SLANG_SOURCE_LANGUAGE_GLSL,  SLANG_STAGE_COMPUTE },
+            { ".glsl",  SLANG_SOURCE_LANGUAGE_GLSL,   SLANG_STAGE_NONE },
+            { ".vert",  SLANG_SOURCE_LANGUAGE_GLSL,   SLANG_STAGE_VERTEX },
+            { ".frag",  SLANG_SOURCE_LANGUAGE_GLSL,   SLANG_STAGE_FRAGMENT },
+            { ".geom",  SLANG_SOURCE_LANGUAGE_GLSL,   SLANG_STAGE_GEOMETRY },
+            { ".tesc",  SLANG_SOURCE_LANGUAGE_GLSL,   SLANG_STAGE_HULL },
+            { ".tese",  SLANG_SOURCE_LANGUAGE_GLSL,   SLANG_STAGE_DOMAIN },
+            { ".comp",  SLANG_SOURCE_LANGUAGE_GLSL,   SLANG_STAGE_COMPUTE },
 
-            { ".c",    SLANG_SOURCE_LANGUAGE_C,     SLANG_STAGE_NONE },
-            { ".cpp",  SLANG_SOURCE_LANGUAGE_CPP,   SLANG_STAGE_NONE },
-            { ".cu",   SLANG_SOURCE_LANGUAGE_CUDA,  SLANG_STAGE_NONE }
+            { ".c",     SLANG_SOURCE_LANGUAGE_C,      SLANG_STAGE_NONE },
+            { ".cpp",   SLANG_SOURCE_LANGUAGE_CPP,    SLANG_STAGE_NONE },
+            { ".cu",    SLANG_SOURCE_LANGUAGE_CUDA,   SLANG_STAGE_NONE },
+            { ".metal", SLANG_SOURCE_LANGUAGE_METAL,  SLANG_STAGE_NONE }
 
         };
 
@@ -688,6 +689,7 @@ struct OptionsParser
             "      .cpp, .c++, .cxx  -> c++\n"
             "      .exe              -> executable\n"
             "      .dll, .so         -> sharedlibrary\n"
+            "      .metal            -> metal\n"
             "      .cu               -> cuda\n"
             "      .ptx              -> ptx\n"
             "      .obj, .o          -> object-code\n"
@@ -2095,12 +2097,11 @@ struct OptionsParser
                     case CodeGenTarget::CPPSource:
                     case CodeGenTarget::PTX:
                     case CodeGenTarget::CUDASource:
-
+                    case CodeGenTarget::MetalSource:
                     case CodeGenTarget::HostHostCallable:
                     case CodeGenTarget::ShaderHostCallable:
                     case CodeGenTarget::HostExecutable:
                     case CodeGenTarget::ShaderSharedLibrary:
-
                     case CodeGenTarget::DXIL:
 
                         rawOutput.isWholeProgram = true;

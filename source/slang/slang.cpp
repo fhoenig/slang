@@ -1358,6 +1358,9 @@ CapabilitySet TargetRequest::getTargetCaps()
         atoms.add(CapabilityAtom::CPP);
         break;
 
+    case CodeGenTarget::MetalSource:
+        atoms.add(CapabilityAtom::METAL);
+        break;
     case CodeGenTarget::CUDASource:
     case CodeGenTarget::PTX:
         atoms.add(CapabilityAtom::CUDA);

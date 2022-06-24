@@ -65,6 +65,7 @@ enum class ArtifactPayload : uint8_t
     CPP,            ///< C++
     C,              ///< C Language
     CUDA,           ///< CUDA
+    Metal,          ///< Metal
     Slang,          ///< Slang
 
     DebugInfo,      ///< Debug information 

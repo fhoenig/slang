@@ -17,6 +17,7 @@ enum class RenderApiType
     D3D11,
     CPU,
     CUDA,
+    Metal,
     CountOf,
 };
 
@@ -31,6 +32,7 @@ struct RenderApiFlag
         D3D11 = 1 << int(RenderApiType::D3D11),
         CPU   = 1 << int(RenderApiType::CPU),
         CUDA  = 1 << int(RenderApiType::CUDA),
+        Metal  = 1 << int(RenderApiType::Metal),
         AllOf = (1 << int(RenderApiType::CountOf)) - 1                   ///< All bits set
     };
 };

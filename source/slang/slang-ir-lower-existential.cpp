@@ -9,7 +9,8 @@ namespace Slang
 {
     bool isCPUTarget(TargetRequest* targetReq);
     bool isCUDATarget(TargetRequest* targetReq);
-
+    bool isMetalTarget(TargetRequest* targetReq);
+    
     struct ExistentialLoweringContext
     {
         SharedGenericsLoweringContext* sharedContext;

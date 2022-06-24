@@ -3039,6 +3039,7 @@ static bool _isPTXTarget(CodeGenTarget target)
 {
     switch (target)
     {
+        case CodeGenTarget::MetalSource:
         case CodeGenTarget::CUDASource:
         case CodeGenTarget::PTX:
         {

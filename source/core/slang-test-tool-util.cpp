@@ -87,6 +87,17 @@ static SlangResult _addCUDAPrelude(const String& rootPath, slang::IGlobalSession
     session->setLanguagePrelude(SLANG_SOURCE_LANGUAGE_CUDA, prelude.getBuffer());
     return SLANG_OK;
 }
+    
+static SlangResult _addMetalPrelude(const String& rootPath, slang::IGlobalSession* session)
+{
+    String includePath;
+    SLANG_RETURN_ON_FAIL(TestToolUtil::getIncludePath(rootPath, "prelude/slang-metal-prelude.h", includePath));
+    StringBuilder prelude;
+    prelude << "#include \"" << includePath << "\"\n\n";
+    session->setLanguagePrelude(SLANG_SOURCE_LANGUAGE_METAL, prelude.getBuffer());
+    return SLANG_OK;
+}
+
 
 /* static */SlangResult TestToolUtil::getExeDirectoryPath(const char* exePath, String& outExeDirectoryPath)
 {
@@ -133,7 +144,12 @@ static SlangResult _addCUDAPrelude(const String& rootPath, slang::IGlobalSession
     {
         SLANG_ASSERT(!"Couldn't find the CUDA prelude relative to the executable");
     }
-    
+
+    if (SLANG_FAILED(_addMetalPrelude(rootPath, session)))
+    {
+        SLANG_ASSERT(!"Couldn't find the Metal prelude relative to the executable");
+    }
+
     return SLANG_OK;
 }
 

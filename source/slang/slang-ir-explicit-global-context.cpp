@@ -65,7 +65,7 @@ struct IntroduceExplicitGlobalContextPass
                     // this is represented as a variable with the `@GroupShared`
                     // rate on its type.
                     //
-                    if( m_target == CodeGenTarget::CUDASource )
+                    if( m_target == CodeGenTarget::CUDASource || m_target == CodeGenTarget::MetalSource )
                     {
                         if( as<IRGroupSharedRate>(globalVar->getRate()) )
                             continue;
@@ -106,7 +106,7 @@ struct IntroduceExplicitGlobalContextPass
                     // For CUDA output, we want to leave the global uniform
                     // parameter where it is, because it will translate to
                     // a global `__constant__` variable.
-                    if(m_target == CodeGenTarget::CUDASource)
+                    if(m_target == CodeGenTarget::CUDASource || m_target == CodeGenTarget::MetalSource)
                         continue;
 
                     SLANG_ASSERT(!m_globalUniformsParam);
@@ -140,7 +140,7 @@ struct IntroduceExplicitGlobalContextPass
         // it is responsible for introducing the explicit entry-point
         // parameter that is used for passing in the global param(s).
         //
-        if( m_target == CodeGenTarget::CUDASource )
+        if( m_target == CodeGenTarget::CUDASource || m_target == CodeGenTarget::MetalSource )
         {
             if( !m_globalUniformsParam && (m_globalVars.getCount() == 0) )
             {

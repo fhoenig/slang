@@ -24,7 +24,7 @@
 
 #include "slang-glsl-extension-tracker.h"
 #include "slang-emit-cuda.h"
-
+#include "slang-emit-metal.h"
 #include "slang-serialize-container.h"
 //
 
@@ -553,6 +553,7 @@ void printDiagnosticArg(StringBuilder& sb, CodeGenTarget val)
             case CodeGenTarget::GLSL:
             case CodeGenTarget::HLSL:
             case CodeGenTarget::CUDASource:
+            case CodeGenTarget::MetalSource:
             case CodeGenTarget::CPPSource:
             case CodeGenTarget::HostCPPSource:
             case CodeGenTarget::CSource:
@@ -962,6 +963,10 @@ void printDiagnosticArg(StringBuilder& sb, CodeGenTarget val)
             case CodeGenTarget::CUDASource:
             {
                 return new CUDAExtensionTracker;
+            }
+            case CodeGenTarget::MetalSource:
+            {
+                return new MetalExtensionTracker;
             }
             case CodeGenTarget::SPIRV:
             case CodeGenTarget::GLSL:
@@ -1634,6 +1639,7 @@ void printDiagnosticArg(StringBuilder& sb, CodeGenTarget val)
         case CodeGenTarget::GLSL:
         case CodeGenTarget::HLSL:
         case CodeGenTarget::CUDASource:
+        case CodeGenTarget::MetalSource:
         case CodeGenTarget::CPPSource:
         case CodeGenTarget::HostCPPSource:
         case CodeGenTarget::CSource:
@@ -2416,6 +2422,7 @@ void printDiagnosticArg(StringBuilder& sb, CodeGenTarget val)
             case CodeGenTarget::DXILAssembly:       return ".dxil.asm";
             case CodeGenTarget::CSource:            return ".c";
             case CodeGenTarget::CUDASource:         return ".cu";
+            case CodeGenTarget::MetalSource:        return ".metal";
             case CodeGenTarget::CPPSource:          return ".cpp";
             case CodeGenTarget::HostCPPSource:      return ".cpp";
 

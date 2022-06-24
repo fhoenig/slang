@@ -567,6 +567,7 @@ extern "C"
         SLANG_SHADER_SHARED_LIBRARY,     ///< A shared library/Dll for shader kernels (for hosting CPU/OS)
         SLANG_SHADER_HOST_CALLABLE,      ///< A CPU target that makes the compiled shader code available to be run immediately
         SLANG_CUDA_SOURCE,          ///< Cuda source
+        SLANG_METAL_SOURCE,          ///< Metal source
         SLANG_PTX,                  ///< PTX
         SLANG_OBJECT_CODE,          ///< Object code that can be used for later linking
         SLANG_HOST_CPP_SOURCE,      ///< C++ code for host library or executable.
@@ -696,6 +697,7 @@ extern "C"
         SLANG_SOURCE_LANGUAGE_C,
         SLANG_SOURCE_LANGUAGE_CPP,
         SLANG_SOURCE_LANGUAGE_CUDA,
+        SLANG_SOURCE_LANGUAGE_METAL,
         SLANG_SOURCE_LANGUAGE_COUNT_OF,
     };
 

@@ -19,6 +19,7 @@ namespace Slang
         case SLANG_CPP_SOURCE:         return SLANG_SOURCE_LANGUAGE_CPP;
         case SLANG_HOST_CPP_SOURCE:    return SLANG_SOURCE_LANGUAGE_CPP;
         case SLANG_CUDA_SOURCE:        return SLANG_SOURCE_LANGUAGE_CUDA;
+        case SLANG_METAL_SOURCE:       return SLANG_SOURCE_LANGUAGE_METAL;
         default: break;
     }
     return SLANG_SOURCE_LANGUAGE_UNKNOWN;
@@ -33,6 +34,7 @@ namespace Slang
         case SLANG_SOURCE_LANGUAGE_C:       return SLANG_C_SOURCE;
         case SLANG_SOURCE_LANGUAGE_CPP:     return SLANG_CPP_SOURCE;
         case SLANG_SOURCE_LANGUAGE_CUDA:    return SLANG_CUDA_SOURCE;
+        case SLANG_SOURCE_LANGUAGE_METAL:   return SLANG_METAL_SOURCE;
     }
 
     return SLANG_TARGET_UNKNOWN;

@@ -439,6 +439,7 @@ static DocMarkdownWriter::Requirement _getRequirementFromTargetToken(const Token
         CapabilityAtom::GLSL,
         CapabilityAtom::HLSL,
         CapabilityAtom::CUDA,
+        CapabilityAtom::METAL,
         CapabilityAtom::CPP,
         CapabilityAtom::C,
     };
@@ -464,6 +465,10 @@ static DocMarkdownWriter::Requirement _getRequirementFromTargetToken(const Token
     else if (isCapabilityDerivedFrom(targetCap, CapabilityAtom::CUDA))
     {
         return Requirement{ CodeGenTarget::CUDASource, targetName };
+    }
+    else if (isCapabilityDerivedFrom(targetCap, CapabilityAtom::METAL))
+    {
+        return Requirement{ CodeGenTarget::MetalSource, targetName };
     }
     else if (isCapabilityDerivedFrom(targetCap, CapabilityAtom::CPP))
     {

@@ -72,6 +72,7 @@ static const CompileTargetInfo s_compileTargetInfos[] =
     { SLANG_HOST_EXECUTABLE,"exe",                                              "exe,executable" },
     { SLANG_SHADER_SHARED_LIBRARY, "dll,so",                                    "sharedlib,sharedlibrary,dll" },
     { SLANG_CUDA_SOURCE,    "cu",                                               "cuda,cu"  },
+    { SLANG_METAL_SOURCE,   "metal",                                            "metal"  },
     { SLANG_PTX,            "ptx",                                              "ptx" },
     { SLANG_SHADER_HOST_CALLABLE,  "",                                          "host-callable,callable" },
     { SLANG_OBJECT_CODE,    "obj,o",                                            "object-code" },
@@ -189,6 +190,11 @@ static const ArchiveTypeInfo s_archiveTypeInfos[] =
     {
         return SLANG_SOURCE_LANGUAGE_CUDA;
     }
+    else if (text == "metal")
+    {
+        return SLANG_SOURCE_LANGUAGE_METAL;
+    }
+
     return SLANG_SOURCE_LANGUAGE_UNKNOWN;
 }
 

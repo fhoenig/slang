@@ -17,4 +17,8 @@ void legalizeEntryPointVaryingParamsForCUDA(
     IRModule*               module,
     DiagnosticSink*         sink);
 
+void legalizeEntryPointVaryingParamsForMetal(
+    IRModule*               module,
+    DiagnosticSink*         sink);
+
 }

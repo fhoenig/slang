@@ -77,6 +77,7 @@ namespace Slang
         ShaderSharedLibrary = SLANG_SHADER_SHARED_LIBRARY,
         ShaderHostCallable  = SLANG_SHADER_HOST_CALLABLE,
         CUDASource          = SLANG_CUDA_SOURCE,
+        MetalSource         = SLANG_METAL_SOURCE,
         PTX                 = SLANG_PTX,
         ObjectCode          = SLANG_OBJECT_CODE,
         HostHostCallable    = SLANG_HOST_HOST_CALLABLE,
@@ -1623,6 +1624,10 @@ namespace Slang
         /// Are we generating code for a CUDA API (CUDA / OptiX)?
     bool isCUDATarget(TargetRequest* targetReq);
 
+        /// Are we generating code for a CUDA API (CUDA / OptiX)?
+    bool isMetalTarget(TargetRequest* targetReq);
+
+    
         /// Are resource types "bindless" (implemented as ordinary data) on the given `target`?
     bool areResourceTypesBindlessOnTarget(TargetRequest* target);
 

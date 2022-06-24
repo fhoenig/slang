@@ -36,6 +36,7 @@ namespace Slang {
         case SLANG_SHADER_SHARED_LIBRARY:   return make(Kind::SharedLibrary, Payload::HostCPU, Style::Kernel, 0);
         case SLANG_SHADER_HOST_CALLABLE:    return make(Kind::Callable, Payload::HostCPU, Style::Kernel, 0);
         case SLANG_CUDA_SOURCE:             return make(Kind::Text, Payload::CUDA, Style::Kernel, 0);
+        case SLANG_METAL_SOURCE:            return make(Kind::Text, Payload::Metal, Style::Kernel, 0);
         case SLANG_PTX:                     return make(Kind::Executable, Payload::PTX, Style::Kernel, 0);
         case SLANG_OBJECT_CODE:             return make(Kind::ObjectCode, Payload::HostCPU, Style::Kernel, 0);
         case SLANG_HOST_HOST_CALLABLE:      return make(Kind::Callable, Payload::HostCPU, Style::Host, 0);
